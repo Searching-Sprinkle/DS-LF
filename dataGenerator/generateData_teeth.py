@@ -122,7 +122,7 @@ def generator(matPath, configPath, outputPath, dataFolder, dataType, show=False)
 
     # Generate validation images
     if data.get("randomAngleVal", False) is False:  # 如果没有randomAngleVal，默认为False
-        data["val"] = {"angles": np.linspace(0, data["totalAngle"] / 180 * np.pi, data["numVal"]+1)[:-1] + data["startAngle"]/ 180 * np.pi}
+        data["val"] = {"angles": np.linspace(0, data["totalAngle"] / 180 * np.pi, data["numVal"]+1)[1:] + data["startAngle"]/ 180 * np.pi}
     else:
         data["val"] = {"angles": np.sort(np.random.rand(data["numVal"]) * data["totalAngle"] / 180 * np.pi) + data["startAngle"]/ 180 * np.pi}
     projections = tigre.Ax(np.transpose(img, (2, 1, 0)).copy(), geo, data["val"]["angles"])[:, ::-1, :]
